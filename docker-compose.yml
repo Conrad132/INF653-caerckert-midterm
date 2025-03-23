@@ -1,3 +1,5 @@
+version: '3.7'
+
 services:
   php-apache:
     build:
@@ -15,6 +17,7 @@ services:
       - PASSWORD=${PASSWORD}   
     depends_on:
       - postgres
+    entrypoint: ["sh", "-c", "wait-for-it postgres:5432 -- php -S 0.0.0.0:80 -t /var/www/html"]
 
   postgres:
     image: postgres:latest
@@ -24,3 +27,9 @@ services:
       POSTGRES_DB: ${DBNAME}         
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${USERNAME}", "-d", "${DBNAME}"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s

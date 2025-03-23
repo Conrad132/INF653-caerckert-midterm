@@ -1,5 +1,6 @@
 <?php
-class Database {    private $conn;
+class Database {    
+    private $conn;
 
     public function connect() {
         $host = getenv('HOST');
@@ -21,3 +22,4 @@ class Database {    private $conn;
     }
 }
 ?>
+ 
