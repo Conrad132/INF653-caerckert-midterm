@@ -1,28 +1,25 @@
 <?php
-	class Database {
-		//DB Params
-		private $host = 'localhost';
-		private $port = '5432';
-		private $db_name = 'quotesdb';
-		private $username = 'postgres';
-		private $password = 'postgres';
-		private $conn;
+class Database {    private $conn;
 
+    public function connect() {
+        $host = getenv('HOST');
+        $port = getenv('PORT');
+        $db_name = getenv('DBNAME');
+        $username = getenv('USERNAME');
+        $password = getenv('PASSWORD');
 
-		//DB Connect
-		public function connect() {
-			$this->conn = null;
+		if (!$host || !$port || !$db_name || !$username || !$password) {
+            die(json_encode(['message' => 'Missing database environment variables']));
+        }
+        $dsn = "pgsql:host={$host};port={$port};dbname={$db_name}";
 
-			$dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->db_name}";
-
-			try {
-				$this->conn = new PDO($dsn, $this->username, $this->password);
-
-				$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			} catch(PDOException $e) {
-				die(json_encode(['message' => 'Connection Error: ' . $e->getMessage()]));
-			}
-			return $this->conn;
-		}
-	}
-
+        try {
+            $this->conn = new PDO($dsn, $username, $password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die(json_encode(['message' => 'Connection Error: ' . $e->getMessage()]));
+        }
+        return $this->conn;
+    }
+}
+?>

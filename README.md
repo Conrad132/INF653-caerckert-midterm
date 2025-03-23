@@ -1,2 +1,3 @@
-# INF653-caerckert-midterm
-# INF653-caerckert-midterm
+Name: Conner Erckert
+
+Homepage: https://caerckert-inf653-midterm.onrender.com/
