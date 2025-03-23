@@ -8,9 +8,7 @@ class Database {    private $conn;
         $username = getenv('USERNAME');
         $password = getenv('PASSWORD');
 
-		if (!$host || !$port || !$db_name || !$username || !$password) {
-            die(json_encode(['message' => 'Missing database environment variables']));
-        }
+		
         $dsn = "pgsql:host={$host};port={$port};dbname={$db_name}";
 
         try {
