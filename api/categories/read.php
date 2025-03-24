@@ -26,7 +26,7 @@ if ($num > 0) {
         extract($row);
         $categories_arr[] = array(
             'id' => $id,
-            'name' => $name
+            'category' => $category
         );
     }
 

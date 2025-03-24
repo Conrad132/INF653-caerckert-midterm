@@ -6,7 +6,7 @@ class Author {
 
     // Properties
     public $id;
-    public $name;
+    public $author;
 
     // Constructor
     public function __construct($db) {
@@ -54,7 +54,7 @@ class Author {
 
                 // Set properties
                 $this->id = $row['id'];
-                $this->name = $row['name'];
+                $this->author = $row['author'];
 
                 return true;
             }

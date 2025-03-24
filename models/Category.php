@@ -6,7 +6,7 @@ class Category {
 
     // Properties
     public $id;
-    public $name;
+    public $category;
 
     // Constructor with DB 
 	public function __construct($db) {

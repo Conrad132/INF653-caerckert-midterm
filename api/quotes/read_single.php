@@ -17,16 +17,25 @@ $quote = new Quote($db);
 $quote->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 // Get quote
-$quote->read_single();
+if ($quote->id) {
+    $quote->read_single();
 
-// Create an array with the data
-$quote_array = array(
-    'id' => $quote->id, 
-    'quote' => $quote->quote,  // Assuming 'quote' is the field in your Quote class
-    'author' => $quote->author_name,  // Assuming 'author_name' is set in your class
-    'category' => $quote->category_name,  // Assuming 'category_name' is set in your class
-);
-
-// Return JSON response
-echo json_encode($quote_array);
+    if ($quote->quote) {
+        $quote_array = array(
+            'id' => $quote->id, 
+            'quote' => $quote->quote,  
+            'author' => $quote->author_name,  
+            'category' => $quote->category_name,  
+        );
+        echo json_encode($quote_array);
+    } else {
+        // Return an error if no quote found
+        http_response_code(404);
+        echo json_encode(array('message' => 'No Quotes Found'));
+    }
+} else {
+    // Handle case where ID is not provided or invalid
+    http_response_code(400);
+    echo json_encode(array('message' => 'Invalid or missing ID'));
+}
 ?>

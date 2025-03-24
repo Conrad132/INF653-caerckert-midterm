@@ -31,7 +31,7 @@
             // Create author item
             $author_item = array(
                 'id' => $id,
-                'name' => $name // assuming the column is 'name'
+                'author' => $author 
             );
 
             // Push to "data"

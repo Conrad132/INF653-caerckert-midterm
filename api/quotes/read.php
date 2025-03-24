@@ -28,11 +28,12 @@ if ($num > 0) {
         extract($row);
     
         $quote_item = array(
-            'id' => $id,
-            'quote' => html_entity_decode($quote),  
-            'author' => $author_name,  
-            'category' => $category_name,
-            'category_id' => $category_id
+            'id' => isset($id) ? $id : null,
+            'quote' => isset($quote) ? html_entity_decode($quote) : null,
+            'author' => isset($author_name) ? $author_name : 'Unknown Author',
+            'author_id' => isset($author_id) ? $author_id : null,
+            'category' => isset($category_name) ? $category_name : 'Uncategorized',
+            'category_id' => isset($category_id) ? $category_id : null
         );
     
         array_push($quotes_arr, $quote_item);
