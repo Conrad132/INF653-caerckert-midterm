@@ -24,7 +24,7 @@ $database = new Database();
 $db = $database->connect();
 
 // Handle Routing
-$request_uri = $_SERVER['REQUEST_URI'];
+$request_uri = strtok($_SERVER['REQUEST_URI'], '?'); // Removes query parameters
 
 switch ($request_uri) {
     case '/quotes':
@@ -41,4 +41,3 @@ switch ($request_uri) {
         echo json_encode(['message' => 'Endpoint not found']);
         break;
 }
-?>

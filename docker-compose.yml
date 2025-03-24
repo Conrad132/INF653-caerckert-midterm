@@ -10,14 +10,15 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      - HOST=${HOST}           
-      - PORT=${PORT}           
-      - DBNAME=${DBNAME}       
-      - USER=${USERNAME}       
-      - PASSWORD=${PASSWORD}   
+      - HOST=postgres
+      - PORT=5432
+      - DBNAME=${DBNAME}
+      - USER=${USERNAME}
+      - PASSWORD=${PASSWORD}
     depends_on:
       - postgres
-    entrypoint: ["sh", "-c", "wait-for-it postgres:5432 -- php -S 0.0.0.0:80 -t /var/www/html"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   postgres:
     image: postgres:latest
@@ -33,4 +34,4 @@ services:
       retries: 5
       start_period: 5s
       timeout: 5s
-      
+  
