@@ -32,7 +32,9 @@ if ($num > 0) {
             'id' => $id,
             'quote' => html_entity_decode($quote),  
             'author' => $author_name,  
-            'category' => $category_name  
+            'category' => $category_name,
+            'category_id' => $category_id 
+  
         );
     
         array_push($quotes_arr['data'], $quote_item);

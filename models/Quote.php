@@ -23,14 +23,15 @@ class Quote{
     public function read() {
         // Create query
         $query = 'SELECT 
-                    q.id,
-                    q.quote,
-                    a.author AS author_name,
-                    c.category AS category_name
-                FROM ' . $this->table . ' q
-                LEFT JOIN authors a ON q.author_id = a.id
-                LEFT JOIN categories c ON q.category_id = c.id
-                ORDER BY q.id DESC';
+            q.id,
+            q.quote,
+            q.category_id,
+            a.author AS author_name,
+            c.category AS category_name
+          FROM ' . $this->table . ' q
+          LEFT JOIN authors a ON q.author_id = a.id
+          LEFT JOIN categories c ON q.category_id = c.id
+          ORDER BY q.id DESC';
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
