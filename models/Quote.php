@@ -75,7 +75,9 @@ class Quote{
             $this->author_name = $row['author_name'];
             $this->category_name = $row['category_name'];
         } else {
-            return false;  // Quote not found
+            http_response_code(404);
+            echo json_encode(array('message' => 'No Quotes Found'));
+            return;
         }
     }
 
