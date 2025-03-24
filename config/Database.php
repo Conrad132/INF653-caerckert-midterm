@@ -9,7 +9,7 @@ class Database {
 
     public function __construct(){
         $this->host = getenv('HOST');
-        $this->port = getenv('PORT');
+        $this->port = 5432;
         $this->dbname = getenv('DBNAME');
         $this->username = getenv('USERNAME');
         $this->password = getenv('PASSWORD');
