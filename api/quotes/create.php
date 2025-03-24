@@ -40,4 +40,4 @@ if ($quote->create()) {
     http_response_code(500); // Server error
     echo json_encode(['message' => 'Quote Not Created']);
 }
-    ?>
+?>

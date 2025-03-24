@@ -31,4 +31,3 @@ if ($author->read_single()) {
     echo json_encode(array('message' => 'Author Not Found'));
 }
 ?>
- 

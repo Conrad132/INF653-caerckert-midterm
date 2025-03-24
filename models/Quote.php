@@ -30,7 +30,7 @@ class Quote{
                 FROM ' . $this->table . ' q
                 LEFT JOIN authors a ON q.author_id = a.id
                 LEFT JOIN categories c ON q.category_id = c.id
-                ORDER BY q.created_at DESC';
+                ORDER BY q.id DESC';
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
