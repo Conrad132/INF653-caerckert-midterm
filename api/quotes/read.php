@@ -23,7 +23,6 @@ $num = $result->rowCount();
 if ($num > 0) {
     // Quote array
     $quotes_arr = array();
-    $quotes_arr['data'] = array();
 
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
@@ -33,19 +32,18 @@ if ($num > 0) {
             'quote' => html_entity_decode($quote),  
             'author' => $author_name,  
             'category' => $category_name,
-            'category_id' => $category_id 
-  
+            'category_id' => $category_id
         );
     
-        array_push($quotes_arr['data'], $quote_item);
+        array_push($quotes_arr, $quote_item);
     }
 
     // Set response code and output JSON
     http_response_code(200);
     echo json_encode($quotes_arr);
 } else {
-    // No Quote Found
-    http_response_code(404);
-    echo json_encode(array('message' => 'No Quotes Found'));
+    // No Quotes Found - Return an empty array
+    http_response_code(200);
+    echo json_encode([]);
 }
 ?>
