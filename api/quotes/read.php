@@ -44,6 +44,6 @@ if ($num > 0) {
 } else {
     // No Quotes Found - Return an empty array
     http_response_code(200);
-    echo json_encode([]);
+    echo json_encode(array('message' => 'No Quotes Found'));
 }
 ?>
