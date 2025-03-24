@@ -46,39 +46,35 @@ class Quote{
     // Get Single Quote
     public function read_single() {
         // Create query
-        $query = 'SELECT 
-                    q.id,
-                    q.quote,
-                    a.author AS author_name,
-                    c.category AS category_name
-                FROM ' . $this->table . ' q
-                LEFT JOIN authors a ON q.author_id = a.id
-                LEFT JOIN categories c ON q.category_id = c.id
-                WHERE q.id = ?
-                LIMIT 0,1';
+        $query = 'SELECT q.id, q.quote, a.author_name, c.category_name, c.id as category_id
+              FROM quotes q
+              JOIN authors a ON q.author_id = a.id
+              JOIN categories c ON q.category_id = c.id
+              WHERE q.id = :id
+              LIMIT 1'; // Only one result
 
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
+    $stmt = $this->conn->prepare($query);
+    
+    // Bind the ID to the query
+    $stmt->bindParam(':id', $this->id);
+    
+    // Execute the query
+    $stmt->execute();
 
-        // Bind ID
-        $stmt->bindParam(1, $this->id, PDO::PARAM_INT);
+    // Fetch the result
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Execute query
-        $stmt->execute();
-
-        // Fetch result
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row) {
-            // Set properties
-            $this->quote = $row['quote'];
-            $this->author_name = $row['author_name'];
-            $this->category_name = $row['category_name'];
-        } else {
-            http_response_code(404);
-            echo json_encode(array('message' => 'No Quotes Found'));
-            return;
-        }
+    if ($row) {
+        // Set the quote object properties
+        $this->id = $row['id'];
+        $this->quote = $row['quote'];
+        $this->author_name = $row['author_name'];
+        $this->category_name = $row['category_name'];
+        $this->category_id = $row['category_id'];
+    } else {
+        // No quote found, handle accordingly
+        return null;
+    }
     }
 
     // Create Quote
