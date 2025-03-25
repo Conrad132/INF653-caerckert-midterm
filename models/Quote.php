@@ -45,40 +45,31 @@ class Quote{
 
     // Get Single Quote
     public function read_single() {
-        // Create query
-        $query = 'SELECT 
-                    q.id,
-                    q.quote,
-                    a.author AS author_name,
-                    c.category AS category_name
-                FROM ' . $this->table . ' q
-                LEFT JOIN authors a ON q.author_id = a.id
-                LEFT JOIN categories c ON q.category_id = c.id
-                WHERE q.id = ?
-                LIMIT 0,1';
+    $query = "SELECT 
+                q.id, 
+                q.quote, 
+                a.name AS author_name, 
+                c.name AS category_name
+              FROM quotes q
+              INNER JOIN authors a ON q.author_id = a.id
+              INNER JOIN categories c ON q.category_id = c.id
+              WHERE q.id = :id
+              LIMIT 1";
 
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Bind ID
-        $stmt->bindParam(1, $this->id, PDO::PARAM_INT);
-
-        // Execute query
-        $stmt->execute();
-
-        // Fetch result
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row) {
-            // Set properties
-            $this->quote = $row['quote'];
-            $this->author_name = $row['author_name'];
-            $this->category_name = $row['category_name'];
-        } else {
-        echo json_encode(array('message' => 'No Quotes Found'));
-        return;
+    if ($row) {
+        $this->quote = $row['quote'];
+        $this->author_name = $row['author_name'];
+        $this->category_name = $row['category_name'];
+        return true;
+    } else {
+        return false;
     }
-    }
+}
 
     // Create Quote
     public function create() {
