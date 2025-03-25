@@ -30,12 +30,10 @@ if ($quote->id) {
         echo json_encode($quote_array);
     } else {
         // Return an error if no quote found
-        http_response_code(404);
         echo json_encode(array('message' => 'No Quotes Found'));
     }
 } else {
     // Handle case where ID is not provided or invalid
-    http_response_code(400);
     echo json_encode(array('message' => 'Invalid or missing ID'));
 }
 ?>

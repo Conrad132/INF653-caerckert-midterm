@@ -37,12 +37,10 @@ if ($num > 0) {
         array_push($quotes_arr, $quote_item);
     }
 
-    // Set response code and output JSON
-    http_response_code(200);
+    // output JSON
     echo json_encode($quotes_arr);
 } else {
     // No Quotes Found - Return an empty array
-    http_response_code(200);
     echo json_encode(array('message' => 'No Quotes Found'));
 }
 ?>

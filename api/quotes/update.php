@@ -35,10 +35,10 @@
 
     // Update quote
     if ($quote->update()) {
-        http_response_code(200);
+        
         echo json_encode(array('message' => 'Quote Updated'));
     } else {
-        http_response_code(500);
+        
         echo json_encode(array('message' => 'Quote Not Updated'));
 }
 ?>
