@@ -44,9 +44,7 @@ class Quote{
 
     // Get Single Quote
     public function read_single() {
-     // Debug: Check if the ID is set correctly
-    var_dump($this->id);
-
+        
     $query = 'SELECT 
                  q.id,
                  q.quote,
