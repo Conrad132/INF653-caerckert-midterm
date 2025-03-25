@@ -35,7 +35,7 @@ class Author {
     // Get single author by ID
     public function read_single() {
         // Query to fetch single author
-        $query = 'SELECT id, name FROM ' . $this->table . ' WHERE id = :id LIMIT 1';
+        $query = 'SELECT id, author FROM ' . $this->table . ' WHERE id = :id LIMIT 1';
 
         try {
             // Prepare statement

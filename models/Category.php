@@ -18,7 +18,7 @@ class Category {
         // Create query
         $query = 'SELECT
             id, 
-            name
+            category
         FROM
         ' . $this->table . '
         ORDER BY
