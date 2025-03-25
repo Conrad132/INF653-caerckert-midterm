@@ -44,7 +44,7 @@ class Quote{
 
     // Get Single Quote
     public function read_single() {
-        
+
     $query = 'SELECT 
                  q.id,
                  q.quote,
@@ -62,8 +62,6 @@ class Quote{
 
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Debug: Check the result of the query
-    var_dump($row);
 
     if ($row) {
         $this->quote = $row['quote'];
