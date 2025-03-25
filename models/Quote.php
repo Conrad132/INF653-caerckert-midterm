@@ -63,6 +63,7 @@ class Quote{
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row) {
+        $this->id = $row['id'];
         $this->quote = $row['quote'];
         $this->author_name = $row['author_name'];
         $this->category_name = $row['category_name'];
