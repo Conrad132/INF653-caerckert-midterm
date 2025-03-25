@@ -57,7 +57,7 @@ class Quote{
               LIMIT 1";
 
     $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+    $stmt->bindParam(':id', $this->id);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
