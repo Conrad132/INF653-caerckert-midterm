@@ -65,15 +65,13 @@ class Quote{
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row) {
-        // Set the quote object properties
         $this->id = $row['id'];
         $this->quote = $row['quote'];
         $this->author_name = $row['author_name'];
         $this->category_name = $row['category_name'];
-        $this->category_id = $row['category_id'];
+        return true;  // Success
     } else {
-        // No quote found, handle accordingly
-        return null;
+        return false; // No data found
     }
     }
 
