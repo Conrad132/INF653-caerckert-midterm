@@ -16,26 +16,19 @@ $quote = new Quote($db);
 // Get ID from URL
 $quote->id = isset($_GET['id']) ? $_GET['id'] : die();
 
-// Get quote
-if ($quote->id) {
-    $quote_data = $quote->read_single();
-
-if ($quote_data) {
-    // Create an array with the data
-    $quote_array = array(
+// Get the quote data
+if ($quote->read_single()) {
+    // Quote found
+    echo json_encode(array(
         'id' => $quote->id,
         'quote' => $quote->quote,
         'author' => $quote->author_name,
         'category' => $quote->category_name
-    );
-
-    // Set response code and return JSON
-    http_response_code(200);
-    echo json_encode($quote_array);
+    ));
     } else {
-    // No Quote Found - Return a valid JSON response
-    http_response_code(404);
-    echo json_encode(array('message' => 'No quote found.'));
-    }
+        // No quote found, return valid JSON
+        http_response_code(404);
+        echo json_encode(array('message' => 'No Quotes Found'));
 }
+
 ?>
