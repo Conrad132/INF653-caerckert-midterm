@@ -45,6 +45,9 @@ class Quote{
 
     // Get Single Quote
     public function read_single() {
+     // Debug: Check if the ID is set correctly
+    var_dump($this->id);
+
     $query = 'SELECT 
                  q.id,
                  q.quote,
@@ -53,7 +56,7 @@ class Quote{
               FROM ' . $this->table . ' q
               LEFT JOIN authors a ON q.author_id = a.id
               LEFT JOIN categories c ON q.category_id = c.id
-              WHERE q.id = ?
+              WHERE q.id = ? 
               LIMIT 1';
 
     $stmt = $this->conn->prepare($query);
@@ -62,14 +65,16 @@ class Quote{
 
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    // Debug: Check the result of the query
+    var_dump($row);
+
     if ($row) {
-        $this->id = $row['id'];
         $this->quote = $row['quote'];
         $this->author_name = $row['author_name'];
         $this->category_name = $row['category_name'];
         return true;
     } else {
-        return false;  
+        return false;
     }
 }
 
