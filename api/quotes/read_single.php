@@ -28,7 +28,6 @@ if ($quote->id) {
         echo json_encode($quote_array);
     } else {
         // Quote not found
-        http_response_code(404);
         echo json_encode(array('message' => 'No Quotes Found'));
     }
 }
