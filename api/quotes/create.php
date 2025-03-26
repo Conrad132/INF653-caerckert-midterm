@@ -18,12 +18,13 @@ $quote = new Quote($db);
 $author = new Author($db);
 $category = new Category($db);
 
-// Get raw data from POST request
+// Get raw POST data
 $data = json_decode(file_get_contents("php://input"));
 
-// Check for missing parameters (except 'id')
+// Check if required parameters are missing
 if (!isset($data->quote) || !isset($data->author_id) || !isset($data->category_id)) {
     echo json_encode(array('message' => 'Missing Required Parameters'));
+    
     exit();
 }
 
@@ -31,6 +32,7 @@ if (!isset($data->quote) || !isset($data->author_id) || !isset($data->category_i
 $author->id = $data->author_id;
 if (!$author->findById()) {
     echo json_encode(array('message' => 'author_id Not Found'));
+    
     exit();
 }
 
@@ -38,6 +40,7 @@ if (!$author->findById()) {
 $category->id = $data->category_id;
 if (!$category->findById()) {
     echo json_encode(array('message' => 'category_id Not Found'));
+    
     exit();
 }
 
@@ -48,8 +51,15 @@ $quote->category_id = $data->category_id;
 
 // Create quote
 if ($quote->create()) {
-    echo json_encode(array('id' => $quote->id, 'quote' => $quote->quote, 'author_id' => $quote->author_id, 'category_id' => $quote->category_id));
+    echo json_encode(array(
+        'id' => $quote->id,
+        'quote' => $quote->quote,
+        'author_id' => $quote->author_id,
+        'category_id' => $quote->category_id
+    ));
+    
 } else {
     echo json_encode(array('message' => 'Quote Not Created'));
+    
 }
 ?>
