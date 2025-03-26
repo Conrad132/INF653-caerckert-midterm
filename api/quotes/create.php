@@ -3,8 +3,8 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
-Access-Control-Allow-Methods,Authorization,X-Requested-With');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
 
 // Include necessary files
 include_once '../../config/Database.php';
@@ -26,11 +26,26 @@ $data = json_decode(file_get_contents("php://input"));
 
 // Check if required parameters are missing
 if (!isset($data->quote) || !isset($data->author_id) || !isset($data->category_id)) {
+
     echo json_encode(array('message' => 'Missing Required Parameters'));
     exit();
 }
 
+// Validate author_id
+$author->id = $data->author_id;
+if (!$author->findById()) {
 
+    echo json_encode(array('message' => 'author_id Not Found'));
+    exit();
+}
+
+// Validate category_id
+$category->id = $data->category_id;
+if (!$category->findById()) {
+
+    echo json_encode(array('message' => 'category_id Not Found'));
+    exit();
+}
 
 // Set quote details
 $quote->quote = $data->quote;
