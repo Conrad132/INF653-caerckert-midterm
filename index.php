@@ -1,4 +1,12 @@
 <?php
+
+// Error logging
+// Enable error logging and save to a file
+ini_set('display_errors', 0);  // Prevent errors from showing in the response
+ini_set('log_errors', 1);      // Enable error logging
+ini_set('error_log', __DIR__ . '/error.log'); // Log errors to error.log in the root
+
+
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header("Access-Control-Allow-Credentials: true");
@@ -17,7 +25,7 @@ if ($method === 'OPTIONS') {
 
 // Load dependencies
 
-require_once 'config/Database.php';
+require_once __DIR__ . '/config/Database.php';;
 
 // Establish database connection
 $database = new Database();
