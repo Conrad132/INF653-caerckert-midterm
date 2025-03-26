@@ -16,7 +16,7 @@ class Author {
     // Get all authors
     public function read() {
         // Query to fetch authors
-        $query = 'SELECT id, name FROM ' . $this->table . ' ORDER BY id ASC';
+        $query = 'SELECT id, author FROM ' . $this->table . ' ORDER BY id ASC';
 
             $stmt = $this->conn->prepare($query);
 
