@@ -138,12 +138,15 @@ class Quote{
         $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
 
         // Execute query
-        if ($stmt->execute()) {
-            return true;
+        $stmt->execute();
+
+        // Check if any row was actually deleted
+        if ($stmt->rowCount() > 0) {
+            return true; // Success
         }
 
-        return false;
-    }
+        return false; // No row deleted (invalid ID)
+        }
 }
 
 ?>
