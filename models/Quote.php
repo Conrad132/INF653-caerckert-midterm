@@ -75,27 +75,18 @@ class Quote{
 
     // Create Quote
     public function create() {
-        // Create query
-        $query = 'INSERT INTO ' . $this->table . '
-                  SET quote = :quote, 
-                      author_id = :author_id, 
-                      category_id = :category_id';
-
-        // Prepare statement
+        $query = 'INSERT INTO ' . $this->table . ' (quote, author_id, category_id) 
+                  VALUES (:quote, :author_id, :category_id)';
+    
         $stmt = $this->conn->prepare($query);
-
-        // Clean and sanitize data
-        $this->quote = htmlspecialchars(strip_tags($this->quote));
-        $this->author_id = htmlspecialchars(strip_tags($this->author_id));
-        $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-
-        // Bind Data
+    
+        // Bind parameters
         $stmt->bindParam(':quote', $this->quote);
         $stmt->bindParam(':author_id', $this->author_id, PDO::PARAM_INT);
         $stmt->bindParam(':category_id', $this->category_id, PDO::PARAM_INT);
-
-        // Execute query
+    
         if ($stmt->execute()) {
+            $this->id = $this->conn->lastInsertId();  // Retrieve last inserted ID
             return true;
         }
         return false;
