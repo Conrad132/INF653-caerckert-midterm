@@ -13,33 +13,42 @@ include_once '../../models/Quote.php';
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate Quote object
+// Instantiate Quote, Author, Category objects
 $quote = new Quote($db);
+$author = new Author($db);
+$category = new Category($db);
 
-// Get raw posted data
+// Get raw data from POST request
 $data = json_decode(file_get_contents("php://input"));
 
-// Validate input
-if (!isset($data->quote, $data->author_id, $data->category_id)) {
-    http_response_code(400);
+// Check for missing parameters
+if (!isset($data->quote) || !isset($data->author_id) || !isset($data->category_id)) {
     echo json_encode(array('message' => 'Missing Required Parameters'));
-    exit;
+    exit();
 }
 
-// Assign values
-$quote->quote = htmlspecialchars(strip_tags($data->quote));
-$quote->author_id = (int) $data->author_id;  // Ensure integer type
-$quote->category_id = (int) $data->category_id;  // Ensure integer type
+// Validate author_id
+$author->id = $data->author_id;
+if (!$author->findById()) {
+    echo json_encode(array('message' => 'author_id Not Found'));
+    exit();
+}
 
-// Create Quote
+// Validate category_id
+$category->id = $data->category_id;
+if (!$category->findById()) {
+    echo json_encode(array('message' => 'category_id Not Found'));
+    exit();
+}
+
+// Set quote details
+$quote->quote = $data->quote;
+$quote->author_id = $data->author_id;
+$quote->category_id = $data->category_id;
+
+// Create quote
 if ($quote->create()) {
-    // Return the newly created quote with its ID
-    echo json_encode([
-        'id' => $quote->id,  // Fetching last inserted ID
-        'quote' => $quote->quote,
-        'author_id' => $quote->author_id,
-        'category_id' => $quote->category_id
-    ]);
+    echo json_encode(array('id' => $quote->id, 'quote' => $quote->quote, 'author_id' => $quote->author_id, 'category_id' => $quote->category_id));
 } else {
     echo json_encode(array('message' => 'Quote Not Created'));
 }

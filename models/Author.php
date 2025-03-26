@@ -53,5 +53,71 @@ class Author {
             }
             return false; // No author found
     }
+
+    // Create Author
+    public function create() {
+        // Create author
+        $query = 'INSERT INTO ' . $this->table . ' SET author = :author';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Clean and sanitize data
+        $this->author = htmlspecialchars(strip_tags($this->author));
+
+        // Bind Data
+        $stmt->bindParam(':author', $this->author, PDO::PARAM_STR);
+
+        // Execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+    // Update Author
+    public function update() {
+        // Create query
+        $query = 'UPDATE ' . $this->table . '
+                  SET author = :author
+                  WHERE id = :id';
+    
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+    
+        // Clean and sanitize data
+        $this->author = htmlspecialchars(strip_tags($this->author));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+    
+        // Bind Data
+        $stmt->bindParam(':author', $this->author, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+    
+        // Execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    // Delete Author
+    public function delete() {
+        // Create query
+        $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+    
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+    
+        // Clean data
+        $this->id = htmlspecialchars(strip_tags($this->id));
+    
+        // Bind data
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+    
+        // Execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
 }
 ?>
