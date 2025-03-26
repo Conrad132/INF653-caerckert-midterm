@@ -22,7 +22,7 @@ $data = json_decode(file_get_contents("php://input"));
 // Validate input
 if (!isset($data->id) || empty($data->id)) {
     http_response_code(400);
-    echo json_encode(['message' => 'Missing Required ID']);
+    echo json_encode(array('message' => 'Missing Required ID'));
     exit;
 }
 
@@ -31,8 +31,8 @@ $quote->id = htmlspecialchars(strip_tags($data->id));
 
 // Delete quote
 if ($quote->delete()) {
-    echo json_encode(['message' => 'Quote Deleted']);
+    echo json_encode(array('message' => 'Quote Deleted'));
 } else {
-    echo json_encode(['message' => 'Quote Not Deleted']);
+    echo json_encode(array('message' => 'Quote Not Deleted'));
 }
 ?>

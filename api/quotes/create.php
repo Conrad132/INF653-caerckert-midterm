@@ -22,7 +22,7 @@ $data = json_decode(file_get_contents("php://input"));
 // Validate input
 if (!isset($data->title, $data->body, $data->author, $data->category_id)) {
     http_response_code(400);
-    echo json_encode(['message' => 'Missing Required Parameters']);
+    echo json_encode(array('message' => 'Missing Required Parameters'));
     exit;
 }
 
@@ -34,8 +34,8 @@ $quote->category_id = htmlspecialchars(strip_tags($data->category_id));
 
 // Create Quote
 if ($quote->create()) {
-    echo json_encode(['message' => 'Quote Created']);
+    echo json_encode(array('message' => 'Quote Created'));
 } else {
-    echo json_encode(['message' => 'Quote Not Created']);
+    echo json_encode(array('message' => 'Quote Not Created'));
 }
 ?>
