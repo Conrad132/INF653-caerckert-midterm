@@ -98,9 +98,6 @@ class Quote{
         if ($stmt->execute()) {
             return true;
         }
-
-        // Print error if something goes wrong
-        printf("Error: %s.\n", $stmt->error);
         return false;
     }
 
@@ -132,9 +129,6 @@ class Quote{
         if ($stmt->execute()) {
             return true;
         }
-
-        // Print error if something goes wrong
-        printf("Error: %s.\n", $stmt->error);
         return false;
     }
 
@@ -157,8 +151,6 @@ class Quote{
             return true;
         }
 
-        // Print error if something goes wrong
-        printf("Error: %s.\n", $stmt->error);
         return false;
     }
 }

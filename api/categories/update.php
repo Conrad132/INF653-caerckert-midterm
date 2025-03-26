@@ -17,7 +17,7 @@
     $category = new Category($db);
 
     // Get raw categoried data
-    $data = json-decode(file_get_contents("php://input"));
+    $data = json_decode(file_get_contents("php://input"));
 
     // Set ID to be updated
     $category->id = $data->id;
@@ -33,5 +33,4 @@
             array('message' =>'category_id Not Found')
         );
     }
-
 ?>

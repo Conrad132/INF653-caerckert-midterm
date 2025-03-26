@@ -48,5 +48,71 @@ class Category {
         }
         return false;
     }
+
+    // Create Category
+    public function create() {
+        // Create category
+        $query = 'INSERT INTO ' . $this->table . ' SET category = :category';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Clean and sanitize data
+        $this->category = htmlspecialchars(strip_tags($this->category));
+
+        // Bind Data
+        $stmt->bindParam(':category', $this->category, PDO::PARAM_STR);
+
+        // Execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+    // Update Category
+    public function update() {
+        // Create query
+        $query = 'UPDATE ' . $this->table . '
+                  SET category = :category
+                  WHERE id = :id';
+    
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+    
+        // Clean and sanitize data
+        $this->category = htmlspecialchars(strip_tags($this->category));
+        $this->id = htmlspecialchars(strip_tags($this->id));
+    
+        // Bind Data
+        $stmt->bindParam(':category', $this->category, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+    
+        // Execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    // Delete category
+    public function delete() {
+        // Create query
+        $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+    
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+    
+        // Clean data
+        $this->id = htmlspecialchars(strip_tags($this->id));
+    
+        // Bind data
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+    
+        // Execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
 }
 ?>
