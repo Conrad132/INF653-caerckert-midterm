@@ -28,7 +28,7 @@ if (!$data) {
 // Validate required fields
 if (!isset($data->author)) {
     http_response_code(400); // Bad Request
-    echo json_encode(array('message' => 'Missing Required Field: author'));
+    echo json_encode(array('message' => 'Missing Required Parameters'));
     exit();
 }
 

@@ -28,7 +28,7 @@ if (!$data) {
 // Validate required field
 if (!isset($data->category) || empty(trim($data->category))) {
     http_response_code(400);
-    echo json_encode(array('message' => 'Missing Required Field: category'));
+    echo json_encode(array('message' => 'Missing Required Parameters'));
     exit();
 }
 

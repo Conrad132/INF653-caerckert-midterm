@@ -22,7 +22,7 @@
     // Validate input data
     if (!isset($data->id, $data->quote, $data->author_id, $data->author, $data->category_id, $data->category)) {
     http_response_code(400);
-    echo json_encode(array('message' => 'Missing Required Fields'));
+    echo json_encode(array('message' => 'Missing Required Parameters'));
     exit();
     }
     // Set ID to be updated
@@ -39,6 +39,6 @@
         echo json_encode(array('message' => 'Quote Updated'));
     } else {
         
-        echo json_encode(array('message' => 'Quote Not Updated'));
+        echo json_encode(array('message' => 'No Quotes Found'));
 }
 ?>
