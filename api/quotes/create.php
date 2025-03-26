@@ -13,10 +13,9 @@ include_once '../../models/Quote.php';
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate Quote, Author, Category objects
+// Instantiate Quote, 
 $quote = new Quote($db);
-$author = new Author($db);
-$category = new Category($db);
+
 
 // Get raw POST data
 $data = json_decode(file_get_contents("php://input"));
@@ -24,22 +23,6 @@ $data = json_decode(file_get_contents("php://input"));
 // Check if required parameters are missing
 if (!isset($data->quote) || !isset($data->author_id) || !isset($data->category_id)) {
     echo json_encode(array('message' => 'Missing Required Parameters'));
-    
-    exit();
-}
-
-// Validate author_id
-$author->id = $data->author_id;
-if (!$author->findById()) {
-    echo json_encode(array('message' => 'author_id Not Found'));
-    
-    exit();
-}
-
-// Validate category_id
-$category->id = $data->category_id;
-if (!$category->findById()) {
-    echo json_encode(array('message' => 'category_id Not Found'));
     
     exit();
 }
