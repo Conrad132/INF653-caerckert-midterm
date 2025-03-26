@@ -33,6 +33,6 @@ $quote->id = htmlspecialchars(strip_tags($data->id));
 if ($quote->delete()) {
     echo json_encode(array('message' => 'Quote Deleted'));
 } else {
-    echo json_encode(array('message' => 'Quote Not Deleted'));
+    echo json_encode(array('message' => 'No Quotes Found'));
 }
 ?>

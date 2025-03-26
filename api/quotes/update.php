@@ -21,7 +21,7 @@
 
     // Validate input data
     if (!isset($data->id, $data->quote, $data->author_id, $data->author, $data->category_id, $data->category)) {
-    http_response_code(400);
+    
     echo json_encode(array('message' => 'Missing Required Parameters'));
     exit();
     }

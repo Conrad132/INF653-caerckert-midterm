@@ -30,7 +30,7 @@
         );
     } else {
         echo json_encode(
-            array('message' =>'Category Not Updated')
+            array('message' =>'category_id Not Found')
         );
     }
 
