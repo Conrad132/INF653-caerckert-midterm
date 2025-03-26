@@ -28,6 +28,6 @@ if ($author->read_single()) {
     echo json_encode($author_array);
 } else {
     // If no author found
-    echo json_encode(array('message' => 'Author Not Found'));
+    echo json_encode(array('message' => 'author_id Not Found'));
 }
 ?>

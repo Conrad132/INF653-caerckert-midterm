@@ -18,18 +18,12 @@ class Author {
         // Query to fetch authors
         $query = 'SELECT id, name FROM ' . $this->table . ' ORDER BY id ASC';
 
-        try {
-            // Prepare statement
             $stmt = $this->conn->prepare($query);
 
             // Execute query
             $stmt->execute();
 
             return $stmt;
-        } catch (PDOException $e) {
-            echo json_encode(["message" => "Database Error: " . $e->getMessage()]);
-            return null;
-        }
     }
 
     // Get single author by ID
@@ -37,7 +31,6 @@ class Author {
         // Query to fetch single author
         $query = 'SELECT id, author FROM ' . $this->table . ' WHERE id = :id LIMIT 1';
 
-        try {
             // Prepare statement
             $stmt = $this->conn->prepare($query);
 
@@ -58,12 +51,7 @@ class Author {
 
                 return true;
             }
-
             return false; // No author found
-        } catch (PDOException $e) {
-            echo json_encode(["message" => "Database Error: " . $e->getMessage()]);
-            return false;
-        }
     }
 }
 ?>
