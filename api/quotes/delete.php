@@ -6,7 +6,7 @@
 
 
 // Instantiate quote object
-$quote = new Quote($db);
+
 
 // Get raw data from DELETE request
 $data = json_decode(file_get_contents("php://input"));

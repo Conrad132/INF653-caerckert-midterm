@@ -6,11 +6,10 @@
 
 
 // Instantiate DB & connect
-$database = new Database();
-$db = $database->connect();
+
 
 // Instantiate Quote object
-$quote = new Quote($db);
+
 
 // Blog quote query
 $result = $quote->read();

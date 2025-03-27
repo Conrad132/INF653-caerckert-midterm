@@ -7,7 +7,7 @@
 
 
 // Instantiate category object
-$category = new Category($db);
+
 
 // Get raw data from DELETE request
 $data = json_decode(file_get_contents("php://input"));

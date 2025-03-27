@@ -5,11 +5,10 @@
 
 
 // Instantiate DB & connect
-$database = new Database();
-$db = $database->connect();
+
 
 // Instantiate quote object
-$quote = new Quote($db);
+
 
 // Get ID from URL
 $quote->id = isset($_GET['id']) ? $_GET['id'] : die();

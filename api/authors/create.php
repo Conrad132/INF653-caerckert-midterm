@@ -8,7 +8,7 @@
 
 
 // Instantiate author object
-$author = new Author($db);
+
 
 // Get raw data from POST request
 $data = json_decode(file_get_contents("php://input"));

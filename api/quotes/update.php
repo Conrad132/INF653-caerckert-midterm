@@ -7,7 +7,7 @@
 
 
 // Instantiate Quote, Author, Category objects
-$quote = new Quote($db);
+
 $author = new Author($db);
 $category = new Category($db);
 

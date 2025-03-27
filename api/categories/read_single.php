@@ -5,11 +5,10 @@
 
 
 // Instantiate DB & connect
-$database = new Database();
-$db = $database->connect();
+
 
 // Instantiate category object
-$category = new Category($db);
+
 
 // Get ID from URL
 $category->id = isset($_GET['id']) ? $_GET['id'] : die();

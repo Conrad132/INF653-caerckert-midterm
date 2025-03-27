@@ -4,11 +4,10 @@
 
 
     // Instantiate DB & connect
-    $database = new Database();
-    $db = $database->connect();
+
 
     // Instantiate author object
-    $author = new Author($db);
+
 
     // Fetch all authors
     $result = $author->read();
