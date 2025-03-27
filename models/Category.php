@@ -51,26 +51,27 @@ class Category {
 
     public function create() {
         // Correct query syntax for PostgreSQL
-        $query = 'INSERT INTO ' . $this->table . ' (author) VALUES (:author) RETURNING id';
-    
+        $query = 'INSERT INTO ' . $this->table . ' (category) VALUES (:category) RETURNING id';
+            
         // Prepare statement
         $stmt = $this->conn->prepare($query);
-    
+            
         // Clean and sanitize data
-        $this->author = htmlspecialchars(strip_tags($this->author));
-    
+        $this->category = htmlspecialchars(strip_tags($this->category));  // Use $this->category
+            
         // Bind Data
-        $stmt->bindParam(':author', $this->author, PDO::PARAM_STR);
-    
+        $stmt->bindParam(':category', $this->category, PDO::PARAM_STR);
+            
         // Execute query
         if ($stmt->execute()) {
             // Fetch the last inserted id
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $this->id = $row['id']; // Assuming your table has an 'id' column as primary key
             return true;
+            }
+            return false;
         }
-        return false;
-    }
+
     // Update Category
     public function update() {
         // Create query
