@@ -28,6 +28,9 @@ $db = $database->connect();
 $request_uri = strtok($_SERVER['REQUEST_URI'], '?'); // Removes query parameters
 
 switch ($request_uri) {
+    case '/':
+        include 'index.html';
+        break;
     case '/quotes':
         require 'routes/quotes.php';
         break;
