@@ -17,7 +17,8 @@ if ($method === 'OPTIONS') {
 }
 
 // Load dependencies
-require_once __DIR__ . '/config/Database.php';
+
+require_once __DIR__ . '/config/Database.php';;
 
 // Establish database connection
 $database = new Database();
@@ -26,24 +27,19 @@ $db = $database->connect();
 // Handle Routing
 $request_uri = strtok($_SERVER['REQUEST_URI'], '?'); // Removes query parameters
 
-if ($request_uri == '/') {
-    // Serve the HTML file for the root
-    echo file_get_contents('index.html');
-} else {
-    switch ($request_uri) {
-        case '/api/quotes':
-            require 'routes/quotes.php';
-            break;
-        case '/api/authors':
-            require 'routes/authors.php';
-            break;
-        case '/api/categories':
-            require 'routes/categories.php';
-            break;
-        default:
-            http_response_code(404);
-            echo json_encode(['message' => 'Endpoint not found']);
-            break;
-    }
+switch ($request_uri) {
+    case '/quotes':
+        require 'routes/quotes.php';
+        break;
+    case '/authors':
+        require 'routes/authors.php';
+        break;
+    case '/categories':
+        require 'routes/categories.php';
+        break;
+    default:
+        http_response_code(404);
+        echo json_encode(['message' => 'Endpoint not found']);
+        break;
 }
 ?>
