@@ -42,6 +42,13 @@ $data = json_decode(file_get_contents("php://input"));
         exit();
     }
 
+    // Check if the quote ID exists before updating
+    $quote->id = $data->id;
+    if (!$quote->findById()) {  // Implement findById() for Quote
+        echo json_encode(array('message' => 'No Quotes Found'));
+        exit();
+    }
+
     // Set quote details
     $quote->id = $data->id;
     $quote->quote = $data->quote;
