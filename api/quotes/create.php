@@ -4,8 +4,7 @@
 
 
 // Instantiate DB & connect
-$database = new Database();
-$db = $database->connect();
+
 
 // Instantiate objects
 $quote = new Quote($db);

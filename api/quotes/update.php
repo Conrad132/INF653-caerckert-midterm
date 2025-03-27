@@ -4,8 +4,7 @@
 
 
 // Instantiate DB & connect
-$database = new Database();
-$db = $database->connect();
+
 
 // Instantiate Quote, Author, Category objects
 $quote = new Quote($db);
