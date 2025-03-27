@@ -57,7 +57,7 @@ class Author {
     // Create Author
     public function create() {
         // Create author
-        $query = 'INSERT INTO ' . $this->table . ' SET author = :author';
+        $query = 'INSERT INTO ' . $this->table . ' (author) VALUES (:author)';
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);

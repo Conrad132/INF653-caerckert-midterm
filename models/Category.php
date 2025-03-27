@@ -52,7 +52,7 @@ class Category {
     // Create Category
     public function create() {
         // Create category
-        $query = 'INSERT INTO ' . $this->table . ' SET category = :category';
+        $query = 'INSERT INTO ' . $this->table . ' (category) VALUES (:category)';
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
