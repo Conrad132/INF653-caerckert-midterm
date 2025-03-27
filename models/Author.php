@@ -56,7 +56,6 @@ class Author {
 
     // Create Author
     public function create() {
-       // Correct query syntax for PostgreSQL
        $query = 'INSERT INTO ' . $this->table . ' (author) VALUES (:author) RETURNING id';
     
        // Prepare statement
@@ -72,7 +71,7 @@ class Author {
        if ($stmt->execute()) {
            // Fetch the last inserted id
            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-           $this->id = $row['id']; // Assuming your table has an 'id' column as primary key
+           $this->id = $row['id']; 
            return true;
        }
        return false;

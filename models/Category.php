@@ -50,14 +50,14 @@ class Category {
     }
 
     public function create() {
-        // Correct query syntax for PostgreSQL
+       
         $query = 'INSERT INTO ' . $this->table . ' (category) VALUES (:category) RETURNING id';
             
         // Prepare statement
         $stmt = $this->conn->prepare($query);
             
         // Clean and sanitize data
-        $this->category = htmlspecialchars(strip_tags($this->category));  // Use $this->category
+        $this->category = htmlspecialchars(strip_tags($this->category)); 
             
         // Bind Data
         $stmt->bindParam(':category', $this->category, PDO::PARAM_STR);
@@ -66,7 +66,7 @@ class Category {
         if ($stmt->execute()) {
             // Fetch the last inserted id
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $this->id = $row['id']; // Assuming your table has an 'id' column as primary key
+            $this->id = $row['id']; 
             return true;
             }
             return false;

@@ -1,12 +1,5 @@
 <?php
 
-// Error logging
-// Enable error logging and save to a file
-ini_set('display_errors', 0);  // Prevent errors from showing in the response
-ini_set('log_errors', 1);      // Enable error logging
-ini_set('error_log', __DIR__ . '/error.log'); // Log errors to error.log in the root
-
-
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header("Access-Control-Allow-Credentials: true");
@@ -50,6 +43,12 @@ switch ($request_uri) {
         break;
 }
 ?>
+<?php
+
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: text/html; charset=UTF-8');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,9 +78,9 @@ switch ($request_uri) {
         <h1>Midterm REST API</h1>
         <p>Use this API to fetch quotes, authors, and categories.</p>
         <ul>
-            <li>quotes</li>
-            <li>authors</li>
-            <li>categories</li>
+            <li><a href="/api/quotes">Quotes</a></li>
+            <li><a href="/api/authors">Authors</a></li>
+            <li><a href="/api/categories">Categories</a></li>
         </ul>
     </div>
 </body>

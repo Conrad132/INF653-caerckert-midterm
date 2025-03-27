@@ -30,7 +30,7 @@ if ($num > 0) {
         );
     }
 
-    // Set response code & output JSON
+    // Set output JSON
     echo json_encode($categories_arr);
 } else {
     // No Categories Found
