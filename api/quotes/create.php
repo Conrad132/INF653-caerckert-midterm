@@ -7,8 +7,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
 
 
 // Include necessary files
-include_once '../../models/Author.php';
-include_once '../../models/Category.php';
+
 
 // Instantiate DB & connect
 $database = new Database();
